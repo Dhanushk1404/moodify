@@ -1,19 +1,17 @@
 const axios = require("axios");
+const dotenv = require('dotenv');
 
-// Retrieve mood and language from command-line arguments
-// Usage: node youtubeSearch.js <mood> <language>
-// Example: node youtubeSearch.js happy tamil
+
 const mood = process.argv[2] || "happy";
 const language = process.argv[3] || "english";
 
-// Your YouTube Data API key
-const API_KEY = "AIzaSyBJblVWwmnO_qWn5STmLixlXmU2tIblF-o"; // Replace with your actual API key
+dotenv.config();
+const apiKey = process.env.API_KEY;
 
-// Construct the search query (e.g., "happy tamil songs playlist")
 const query = `${mood} ${language} songs playlist`;
 
-// Construct the YouTube Data API URL
-const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query)}&type=playlist&key=${API_KEY}`;
+
+const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query)}&type=playlist&key=${apiKey}`;
 
 async function fetchPlaylists() {
   try {
